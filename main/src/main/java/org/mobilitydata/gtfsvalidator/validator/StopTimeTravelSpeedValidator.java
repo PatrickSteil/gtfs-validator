@@ -207,7 +207,7 @@ public class StopTimeTravelSpeedValidator extends FileValidator {
       final Optional<GtfsStop> endStop = stopTable.byStopId(endStopTime.stopId());
       if (endStop.isEmpty()) {
         // Broken reference is reported in another rule.
-        return;
+        continue;
       }
       // distanceToEndIdx stores the distance between stops endIdx and startIdx for all startIdx <
       // endIdx, computed as the sum of straight-line distances between consecutive stops.
@@ -226,7 +226,7 @@ public class StopTimeTravelSpeedValidator extends FileValidator {
         Optional<GtfsStop> startStop = stopTable.byStopId(startStopTime.stopId());
         if (startStop.isEmpty()) {
           // Broken reference is reported in another rule.
-          return;
+          continue;
         }
         // Give a notice if they are too far apart.
         if (distanceToEndIdx > MAX_DISTANCE_OVER_MAX_SPEED_IN_KMS) {
